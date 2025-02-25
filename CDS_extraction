@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=CDS_extraction             # Job name for Slurm
-#SBATCH --output=/home/barrientosm/scratch/CDS_sequences/log_%j_%x_out.txt         # Log file for standard output (job ID and name included)
-#SBATCH --error=/home/barrientosm/scratch/CDS_sequences/log_%j_%x_err.txt          # Log file for standard error (job ID and name included)
+#SBATCH --output=/home/barrientosm/scratch/CDS_sequences/log_%j_%x_out.txt   # Log file for standard output (job ID and name included)
+#SBATCH --error=/home/barrientosm/scratch/CDS_sequences/log_%j_%x_err.txt    # Log file for standard error (job ID and name included)
 #SBATCH --nodes=1                            # Number of nodes to use
 #SBATCH --ntasks-per-node=1                  # Number of tasks per node
 #SBATCH --mem=6G                             # Memory allocation per job
@@ -9,11 +9,11 @@
 #SBATCH --partition=agap_long                # Specify the job queue/partition
 
 # -------------------------------------------------------------------------------
-# README - Extraction of mRNA Sequences and Adjacent Regions  
+# README - Extraction of CDS Sequences  
 # -------------------------------------------------------------------------------
 # Description:  
-# This script uses the AGAT tool to extract CDS sequences from a GFF file and a reference genome.  
-# CDS: portion of genes translated in proteins
+# This script extracts **CDS sequences** from a GFF file and a reference genome.  
+# CDS = Coding sequences (protein-coding regions of genes)
 
 # -------------------------------------------------------------------------------
 # Step 1: Load required modules
@@ -28,36 +28,36 @@ module load AGAT/1.2.0-singularity            # Load the AGAT tool module (versi
 # Path to the directory containing GFF files
 gff_path="/home/barrientosm/scratch/angsd_analysis/urartu/samtool_GL/tajima_no_soft_clipped_reads"
 
-# Specific GFF file to use (modified version)
+# Specific GFF file to use (T. urartu annotation)
 gff_file="$gff_path/Triticum_urartu.IGDB.59.chr.gff3"
 
 # Path to the directory containing FASTA genome files
 Genome_path="/home/barrientosm/projects/GE2POP/REFERENCES/TRITICUM/URARTU_ORIGINAL"
 
-# Reference genome FASTA file (modified version)
+# Reference genome FASTA file
 Genome="$Genome_path/Triticum_urartu.IGDB.dna.toplevel.fa"
 
-# output directory
+# Output directory
 output_dir="/home/barrientosm/scratch/CDS_sequences/urartu"
 
 # -------------------------------------------------------------------------------
-# Step 3: Extract mRNA sequences with AGAT
+# Step 3: Extract CDS sequences with AGAT
 # -------------------------------------------------------------------------------
-# The AGAT command extracts mRNA sequences and includes 200 bp upstream and downstream regions.
+# The AGAT command extracts **CDS sequences** (coding regions only).
 # Flags:
 #   -g: Path to the GFF file.
 #   -f: Path to the genome FASTA file.
-#   -t: Type of feature to extract.
-#   -o: Output file to store the extracted sequences.
+#   -t: Feature type (CDS in this case).
+#   -o: Output file for extracted sequences.
 
 agat_sp_extract_sequences.pl \
     -g $gff_file \
     -f $Genome \
-    -t cds \
-    -o $output_dir/speltoides_full_CDS.fasta
+    -t CDS \
+    -o $output_dir/urartu_full_CDS.fasta
 
 # -------------------------------------------------------------------------------
 # Output:
-# The extracted CDS sequences
-# regions, are saved in the file: "speltoides_full_CDS.fasta".
+# The extracted CDS sequences are saved in the file:
+# "$output_dir/urartu_full_CDS.fasta".
 # -------------------------------------------------------------------------------
