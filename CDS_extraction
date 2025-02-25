@@ -26,19 +26,19 @@ module load AGAT/1.2.0-singularity            # Load the AGAT tool module (versi
 # -------------------------------------------------------------------------------
 
 # Path to the directory containing GFF files
-gff_path="/home/barrientosm/scratch/angsd_analysis/urartu/samtool_GL/tajima_no_soft_clipped_reads"
+gff_path="/home/barrientosm/scratch/angsd_analysis/speltoides/samtool_GL/tajima_no_soft_clipped_reads"
 
 # Specific GFF file to use (T. urartu annotation)
-gff_file="$gff_path/Triticum_urartu.IGDB.59.chr.gff3"
+gff_file="$gff_path/YANG_2023_Y2032.updata.gff3"
 
 # Path to the directory containing FASTA genome files
 Genome_path="/home/barrientosm/projects/GE2POP/REFERENCES/TRITICUM/URARTU_ORIGINAL"
 
 # Reference genome FASTA file
-Genome="$Genome_path/Triticum_urartu.IGDB.dna.toplevel.fa"
+Genome="$Genome_path/Y2032.updata.genome.fa"
 
 # Output directory
-output_dir="/home/barrientosm/scratch/CDS_sequences/urartu"
+output_dir="/home/barrientosm/scratch/CDS_sequences/speltoides"
 
 # -------------------------------------------------------------------------------
 # Step 3: Extract CDS sequences with AGAT
@@ -54,10 +54,10 @@ agat_sp_extract_sequences.pl \
     -g $gff_file \
     -f $Genome \
     -t CDS \
-    -o $output_dir/urartu_full_CDS.fasta
+    -o $output_dir/speltoides_full_CDS.fasta
 
 # -------------------------------------------------------------------------------
 # Output:
 # The extracted CDS sequences are saved in the file:
-# "$output_dir/urartu_full_CDS.fasta".
+# "$output_dir/speltoides_full_CDS.fasta".
 # -------------------------------------------------------------------------------
