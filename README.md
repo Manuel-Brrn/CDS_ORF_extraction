@@ -1,3 +1,3 @@
-# CDS_extraction
-CDS extraction for ABSREL analysis and enrichment analysis
+# CDS ORF extraction
+CDS and ORF extraction for codon analysis and enrichment analysis
 
