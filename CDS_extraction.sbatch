@@ -54,7 +54,6 @@ agat_sp_extract_sequences.pl \
     -g $gff_file \
     -f $Genome \
     -t CDS \
-    --full \
     -o $output_dir/speltoides_full_CDS.fasta
 
 # -------------------------------------------------------------------------------
